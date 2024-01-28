@@ -1,5 +1,7 @@
 # Trashformers - Garbage Collection Game 🗑️
 
+![Trashformers Logo](logo.png)
+
 Welcome to Trashformers, an engaging game where you take on the role of a responsible citizen tasked with collecting falling garbage from the sky and sorting it into the right bins. Your goal is to promote environmental awareness and proper waste disposal! 🌍
 
 ## Game Overview 🎮
