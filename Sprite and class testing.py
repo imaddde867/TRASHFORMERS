@@ -17,7 +17,7 @@ clock = pygame.time.Clock()
 dt = 0
 
 #placeholders for other stuff (animations will be done differently frame by frame)
-player = pygame.image.load("character\\run_down_2.png").convert_alpha()
+player = pygame.image.load("character//run_down_2.png").convert_alpha()
 
 #character movement animation
 left = False
@@ -26,25 +26,25 @@ up = False
 down = False
 moveCount = 0 
 #movements anim as lists to loop through
-moveRight = [pygame.image.load("character\\run_right_1.png").convert_alpha(), pygame.image.load("character\\run_right_2.png").convert_alpha(), pygame.image.load("character\\run_right_3.png").convert_alpha()]
-moveLeft = [pygame.image.load("character\\run_left_1.png").convert_alpha(), pygame.image.load("character\\run_left_2.png").convert_alpha(), pygame.image.load("character\\run_left_3.png").convert_alpha()]
-moveUp = [pygame.image.load("character\\run_up_1.png").convert_alpha(), pygame.image.load("character\\run_up_2.png").convert_alpha(), pygame.image.load("character\\run_up_3.png").convert_alpha()]
-moveDown = [pygame.image.load("character\\run_down_1.png").convert_alpha(), pygame.image.load("character\\run_down_2.png").convert_alpha(), pygame.image.load("character\\run_down_3.png").convert_alpha()]
+moveRight = [pygame.image.load("character//run_right_1.png").convert_alpha(), pygame.image.load("character//run_right_2.png").convert_alpha(), pygame.image.load("character//run_right_3.png").convert_alpha()]
+moveLeft = [pygame.image.load("character//run_left_1.png").convert_alpha(), pygame.image.load("character//run_left_2.png").convert_alpha(), pygame.image.load("character//run_left_3.png").convert_alpha()]
+moveUp = [pygame.image.load("character//run_up_1.png").convert_alpha(), pygame.image.load("character//run_up_2.png").convert_alpha(), pygame.image.load("character//run_up_3.png").convert_alpha()]
+moveDown = [pygame.image.load("character//run_down_1.png").convert_alpha(), pygame.image.load("character//run_down_2.png").convert_alpha(), pygame.image.load("character//run_down_3.png").convert_alpha()]
 
 #trash = pygame.image.load("trash.png").convert()
 level = pygame.image.load("level.png").convert()
 #trash cans
-plastic = pygame.image.load("bins\\plastic.png").convert_alpha()
-metal = pygame.image.load("bins\\metal.png").convert_alpha()
-glass = pygame.image.load("bins\\glass.png").convert_alpha()
-paper = pygame.image.load("bins\\paper.png").convert_alpha()
-organic = pygame.image.load("bins\\organic.png").convert_alpha()
+plastic = pygame.image.load("bins//plastic.png").convert_alpha()
+metal = pygame.image.load("bins//metal.png").convert_alpha()
+glass = pygame.image.load("bins//glass.png").convert_alpha()
+paper = pygame.image.load("bins//paper.png").convert_alpha()
+organic = pygame.image.load("bins//organic.png").convert_alpha()
 
-trash_plastic = [pygame.image.load("trash\\plastic_1.png").convert_alpha(), pygame.image.load("trash\\plastic_2.png").convert_alpha(), pygame.image.load("trash\\plastic_3.png").convert_alpha(), pygame.image.load("trash\\plastic_4.png").convert_alpha(), pygame.image.load("trash\\plastic_5.png").convert_alpha(), pygame.image.load("trash\\plastic_6.png").convert_alpha(), pygame.image.load("trash\\plastic_7.png").convert_alpha()]
-trash_metal = [pygame.image.load("trash\\metal_1.png").convert_alpha(), pygame.image.load("trash\\metal_2.png").convert_alpha(), pygame.image.load("trash\\metal_3.png").convert_alpha(), pygame.image.load("trash\\metal_4.png").convert_alpha(), pygame.image.load("trash\\metal_5.png").convert_alpha(), pygame.image.load("trash\\metal_6.png").convert_alpha(), pygame.image.load("trash\\metal_7.png").convert_alpha()]
-trash_glass = [pygame.image.load("trash\\glass_1.png").convert_alpha(), pygame.image.load("trash\\glass_2.png").convert_alpha(), pygame.image.load("trash\\glass_3.png").convert_alpha(), pygame.image.load("trash\\glass_4.png").convert_alpha(), pygame.image.load("trash\\glass_5.png").convert_alpha(), pygame.image.load("trash\\glass_6.png").convert_alpha(), pygame.image.load("trash\\glass_7.png").convert_alpha()]
-trash_paper = [pygame.image.load("trash\\paper_1.png").convert_alpha(), pygame.image.load("trash\\paper_2.png").convert_alpha(), pygame.image.load("trash\\paper_3.png").convert_alpha(), pygame.image.load("trash\\paper_4.png").convert_alpha(), pygame.image.load("trash\\paper_5.png").convert_alpha(), pygame.image.load("trash\\paper_6.png").convert_alpha(), pygame.image.load("trash\\paper_7.png").convert_alpha()]
-trash_organic = [pygame.image.load("trash\\organic_1.png").convert_alpha(), pygame.image.load("trash\\organic_2.png").convert_alpha(), pygame.image.load("trash\\organic_3.png").convert_alpha(), pygame.image.load("trash\\organic_4.png").convert_alpha(), pygame.image.load("trash\\organic_5.png").convert_alpha(), pygame.image.load("trash\\organic_6.png").convert_alpha(), pygame.image.load("trash\\organic_7.png").convert_alpha()]
+trash_plastic = [pygame.image.load("trash//plastic_1.png").convert_alpha(), pygame.image.load("trash//plastic_2.png").convert_alpha(), pygame.image.load("trash//plastic_3.png").convert_alpha(), pygame.image.load("trash//plastic_4.png").convert_alpha(), pygame.image.load("trash//plastic_5.png").convert_alpha(), pygame.image.load("trash//plastic_6.png").convert_alpha(), pygame.image.load("trash//plastic_7.png").convert_alpha()]
+trash_metal = [pygame.image.load("trash//metal_1.png").convert_alpha(), pygame.image.load("trash//metal_2.png").convert_alpha(), pygame.image.load("trash//metal_3.png").convert_alpha(), pygame.image.load("trash//metal_4.png").convert_alpha(), pygame.image.load("trash//metal_5.png").convert_alpha(), pygame.image.load("trash//metal_6.png").convert_alpha(), pygame.image.load("trash//metal_7.png").convert_alpha()]
+trash_glass = [pygame.image.load("trash//glass_1.png").convert_alpha(), pygame.image.load("trash//glass_2.png").convert_alpha(), pygame.image.load("trash//glass_3.png").convert_alpha(), pygame.image.load("trash//glass_4.png").convert_alpha(), pygame.image.load("trash//glass_5.png").convert_alpha(), pygame.image.load("trash//glass_6.png").convert_alpha(), pygame.image.load("trash//glass_7.png").convert_alpha()]
+trash_paper = [pygame.image.load("trash//paper_1.png").convert_alpha(), pygame.image.load("trash//paper_2.png").convert_alpha(), pygame.image.load("trash//paper_3.png").convert_alpha(), pygame.image.load("trash//paper_4.png").convert_alpha(), pygame.image.load("trash//paper_5.png").convert_alpha(), pygame.image.load("trash//paper_6.png").convert_alpha(), pygame.image.load("trash//paper_7.png").convert_alpha()]
+trash_organic = [pygame.image.load("trash//organic_1.png").convert_alpha(), pygame.image.load("trash//organic_2.png").convert_alpha(), pygame.image.load("trash//organic_3.png").convert_alpha(), pygame.image.load("trash//organic_4.png").convert_alpha(), pygame.image.load("trash//organic_5.png").convert_alpha(), pygame.image.load("trash//organic_6.png").convert_alpha(), pygame.image.load("trash//organic_7.png").convert_alpha()]
 
 
 #player start position
@@ -62,8 +62,8 @@ organic_pos = pygame.Vector2(screen.get_width() / 2 + 110, screen.get_height() /
 # convert() method converts the picture into the right pixel-format
 # picture files needs to be in the same folder as this python file
 # the folder path can be relative or absolute:
-# relative path: mario = pygame.image.load("folder\\mario.png").convert()
-# absolute path: fireball = pygame.image.load("C:\\folder\\fireball.png").convert()
+# relative path: mario = pygame.image.load("folder//mario.png").convert()
+# absolute path: fireball = pygame.image.load("C://folder//fireball.png").convert()
 
 
 # RGB-colors are tuples (r,g,b), where 0<r,g,b<255

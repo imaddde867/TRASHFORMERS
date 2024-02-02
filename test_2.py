@@ -1,7 +1,38 @@
 import pygame
+import sys
+from pygame.locals import *
 import random
 import os
-import math
+
+# Initialize Pygame
+pygame.init()
+pygame.font.init()
+
+# Constants
+SCREEN_WIDTH = 1600
+SCREEN_HEIGHT = 900
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+
+# Initialize the screen
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Trashformers")
+clock = pygame.time.Clock()
+dt = 0
+
+# Specify the font file path and size
+font_path = "main_menu/font/PunchlineRegular-2OVGd.ttf"
+custom_font_size = 48
+
+# Font setup for the menu
+menu_font = pygame.font.Font(font_path, custom_font_size)
+
+# Loading the background image
+background_image = pygame.image.load("main_menu/Image/main_menu_image.jpg").convert()
+
+# Menu items
+menu_items = ["START GAME", "QUIT"]
+
 
 class FallingImage:
     def __init__(self, image_path, position, scale_factor=1):
@@ -30,19 +61,20 @@ class FallingImage:
         if self.rect.colliderect(ground_rect):
             # Stop falling only if the image is almost inside the rectangle
             if (
-                self.rect.x >= ground_rect.x
-                and self.rect.x + self.rect.width <= ground_rect.x + ground_rect.width
-                and self.rect.y >= ground_rect.y
-                and self.rect.y + self.rect.height <= ground_rect.y + ground_rect.height
+                    self.rect.x >= ground_rect.x
+                    and self.rect.x + self.rect.width <= ground_rect.x + ground_rect.width
+                    and self.rect.y >= ground_rect.y
+                    and self.rect.y + self.rect.height <= ground_rect.y + ground_rect.height
             ):
                 self.fall_speed = 0
 
+
 class FallingImagesGame:
-    def __init__(self, screen_width, screen_height, trash):
+    def __init__(self, screen, trash, game_map):
+        self.screen = screen
+        self.screen_width = SCREEN_WIDTH
+        self.screen_height = SCREEN_HEIGHT
         pygame.init()
-        self.screen_width = screen_width
-        self.screen_height = screen_height
-        self.screen = pygame.display.set_mode((screen_width, screen_height))
         pygame.display.set_caption("Falling Images Game")
         self.clock = pygame.time.Clock()
         self.running = True
@@ -58,6 +90,7 @@ class FallingImagesGame:
         ]
         self.spawn_timer = 0
         self.spawn_delay = 60  # Set a longer delay for spawning
+        self.game_map = game_map  # New parameter for the game map surface
 
     def get_random_image_path(self):
         image_files = [f for f in os.listdir(self.trash) if f.endswith(('.png', '.jpg', '.jpeg'))]
@@ -71,6 +104,15 @@ class FallingImagesGame:
             position = random.choice(self.spawn_positions)
             falling_image = FallingImage(image_path, position, scale_factor=1)
             self.falling_images.append(falling_image)
+
+    def update(self, target_position, ground_rect):
+        for falling_image in self.falling_images:
+            falling_image.update(target_position, ground_rect)
+
+    def draw(self):
+        self.screen.blit(self.game_map, (0, 0))
+        for falling_image in self.falling_images:
+            self.screen.blit(falling_image.image, falling_image.rect)
 
     def run(self):
         target_position = (800, 450)  # Set the target position
@@ -86,21 +128,58 @@ class FallingImagesGame:
                 self.spawn_falling_image()
                 self.spawn_timer = 0
 
-            for falling_image in self.falling_images:
-                falling_image.update(target_position, ground_rect)
+            self.update(target_position, ground_rect)
 
-            self.screen.fill((255, 255, 255))  # White background
+            # Draw the game map first
+            self.screen.blit(self.game_map, (0, 0))
 
-            for falling_image in self.falling_images:
-                self.screen.blit(falling_image.image, falling_image.rect)
+            # Draw falling items on the game map
+            self.draw()
 
             pygame.display.flip()
             self.clock.tick(60)  # Adjust the frame rate as needed
 
         pygame.quit()
 
-if __name__ == "__main__":
-    script_directory = os.path.dirname(os.path.realpath(__file__))
-    trash = os.path.join(script_directory, 'trash')
-    game = FallingImagesGame(1600, 900, trash)
-    game.run()
+    def handle_events(self, events):
+        for event in events:
+            if event.type == pygame.QUIT:
+                self.running = False
+
+    def update(self):
+        self.spawn_timer += 1
+        if self.spawn_timer >= self.spawn_delay:
+            self.spawn_falling_image()
+            self.spawn_timer = 0
+
+        target_position = (800, 450)
+        ground_rect = pygame.Rect(255, 212, 1090, 478)
+        for falling_image in self.falling_images:
+            falling_image.update(target_position, ground_rect)
+
+    def draw(self):
+        self.screen.blit(self.game_map, (0, 0))
+        for falling_image in self.falling_images:
+            self.game_map.blit(falling_image.image, falling_image.rect)
+
+
+def display_menu():
+    clock = pygame.time.Clock()
+
+    while True:
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        mouse_clicked = False
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == MOUSEBUTTONUP and event.button == 1:
+                mouse_clicked = True
+
+        # Redraw the screen with the background image
+        screen.blit(background_image, (0, 0))
+
+        # Draw menu items using the new font
+        for i, item in enumerate(menu_items):
+
